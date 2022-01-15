@@ -1,0 +1,199 @@
+<!-- Shivani Pandit - Frontend -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Twitter Services
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <img src="/images/logo.png" alt="" class="logo"></img>
+      <div class="dropdown">
+        <button class="dropbtn"><img src="<%= tweets[0].user.profile_image_url %>" alt="" class="user"></img></button>
+        <div class="dropdown-content">
+          <a href="#">
+            <%= tweets[0].user.screen_name %>
+          </a>
+          <a href="#">Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="main">
+    <div class="container">
+      <% tweets.forEach(t=> {%>
+        <div class="tweet">
+          <div class="tweet-box">
+            <div class="tw-user">
+              <img src="<%= t.user.profile_image_url %>" alt=""></img>
+            </div>
+            <div class="tw-tweet">
+              <p>
+                <%= t.text %>
+              </p>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="tw-serv">
+            <ul>
+              <li>
+                <a href="#" class="delete" id="<%= t.id_str %>">
+                  <img src="images/delete.png" alt=""></img>
+                </a>
+              </li>
+              <!-- <li>
+                <a href="#">
+                  <button class="myTweet" id="<%= t.id_str %>"><img src="images/edit.png" alt=""
+                      class="update"></img></button>
+                  <div id="update-<%# t.id_str %>" class="modal popup">
+                     Modal content 
+                    <div class="modal-content">
+                      <span class="close1">&times;</span>
+                      <p>Update Your Tweet:</p>
+                      <form action="">
+                        <input type="text" id="tw-<%# t.id_str %>" name="tweet" class="update" value="<%= t.text %>"
+                          placeholder="Let us know what you're thinking">
+                        <input type="submit" value="Submit" class="tw-btn">
+                      </form>
+                    </div>
+                  </div>
+                </a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+        <% } ) %>
+          <div class="add-tweet">
+            <button id="myBtn" class="tw-btn">Add New Tweet</button>
+            <!-- Modal Popup-->
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Post A New Tweet</p>
+                <form method="post">
+                  <input type="text" id="new_tweet" class="new" name="tweet"
+                    placeholder="Let us know what you're thinking">
+                  <input type="submit" value="Submit" class="tw-btn add">
+                </form>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    // SHIVANI PANDIT - FRONTEND
+    var modal = document.getElementById("myModal");
+    var modalupdate = document.getElementsByClassName("popup");
+
+    window.onload = function () {
+      //Add New Tweet Popup
+      document.getElementById("myBtn").onclick = function () {
+        document.getElementById("myModal").style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      document.getElementsByClassName("close").onclick = function () {
+        document.getElementById("myModal").style.display = "none";
+        document.getElementById("update_pop").style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          document.getElementById("myModal").style.display = "none";
+        } else if (event.target == modalupdate) {
+          document.getElementsByClassName("popup").style.display = "none";
+        }
+      }
+    }
+
+    //Update Tweet Popup
+    $(".myTweet").click(function () {
+      var tweet_id = $(this).attr("id");
+      $(this).next().addClass('show');
+    });
+    $(".close1").click(function () {
+      $(".modal").removeClass('show');
+    });
+    $(".modal").click(function () {
+      if ($(this).hasClass('open')) {
+        $(".modal").removeClass('show');
+      }
+    });
+    $(".modal-content").click(function (e) {
+      e.stopPropagation();
+    });
+
+    //Delete
+    $(function () {
+      $(".delete").click(function () {
+        var tweet_id = $(this).attr("id");
+        var go = confirm("Are you sure you want to delete this Tweet?");
+        if (go) {
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/delete/" + tweet_id,
+            data: { id: tweet_id },
+
+            success: function (result) {
+              alert('This Tweet is Deleted');
+              location.reload();
+            },
+            error: function (result) {
+              alert('error');
+            }
+          });
+        }
+        else
+          return;
+      });
+    });
+
+    // new tweet
+    $(document).ready(function () {
+      $("#myModal form").submit(function (event) {
+        var formData = $("#new_tweet").val()
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3000/new/" + formData,
+          data: { tweet: formData },
+          //END SHIVANI PANDIT - FRONTEND 
+
+          // YASH KAMTEKAR - HANDLE ERROR
+          success: function (result) {
+            if (result.status) {
+              alert('This Tweet has been added');
+              location.reload();
+            }
+            else {
+              alert("ERROR " + result.error);
+            }
+          },
+          // END YASH KAMTEKAR
+
+          // SHIVANI PANDIT - FRONTEND
+          error: function (result) {
+            alert('error');
+          }
+        }).done(function (data) {
+          console.log(data);
+        });
+
+        event.preventDefault();
+      });
+    });
+  </script>
+</body>
+
+</html>

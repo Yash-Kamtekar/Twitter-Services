@@ -1,0 +1,237 @@
+/* SHIVANI PANDIT - Frontend */
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/******* Custom CSS *********/
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.clear{clear: both;}
+
+/* HEADER */
+header{
+  text-align: left;
+  box-shadow: 1px 1px 8px 0px #e3e3e3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 9;
+}
+.logo{
+  width: 80px;
+}
+.dropbtn {
+  background: #fff;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  border: none;
+  padding: 15px 0 0;
+}
+.dropbtn img{
+  width: 50px;
+  border-radius: 50%;
+}
+.dropdown {
+  position: relative;
+  float: right;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* MAIN BODY */
+.main{
+  background: #e3e3e3;
+  margin: 84px 0 0;
+  padding: 40px 0;
+}
+.tweet{
+  margin: 0 0 30px;
+}
+.tweet:last-child{
+  margin: 0;
+}
+.tweet-box{
+  background: #fff;
+  padding: 20px 30px; 
+  position: relative;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.tweet-box .tw-user{
+  text-align: left;
+  float: left;
+  padding-right: 15px;
+}
+.tweet-box .tw-user img{
+  width: 50px;
+  display: block;
+  border-radius: 50%;
+}
+.tweet-box .tw-tweet{
+  text-align: left;
+  width: 80%;
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.tweet-box .tw-tweet p{
+  margin: 0;
+}
+.tw-serv{
+  background: #fff;
+  border-top: 1px solid rgb(136, 136, 136);
+  text-align: left;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.tw-serv ul{
+  padding: 10px 30px;
+  margin:0;
+}
+.tw-serv ul li{
+  list-style: none;
+  display: inline-block;
+  padding: 0 10px;
+}
+.tw-serv ul li img{
+  width: 20px;
+}
+.tw-serv ul li button{
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+/* NEW TWEET */
+.new-tweet{
+  text-align: center;
+}
+.tw-btn{
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #55adee;
+  color: #fff; 
+  font-weight: 700;
+  text-decoration: none;
+  padding: 10px 30px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  text-align: center;
+}
+.modal.show{
+  display: block;
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.modal-content p{
+    margin: 0 0 30px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* The Close Button */
+.close, .close1 {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus, .close1:hover, .close1:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.add-tweet{
+  padding: 20px 0 0;
+  text-align: center;
+}
+.modal-content input[type="text"]{
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid rgb(141, 141, 141);
+  border-radius: 5px;
+  padding: 0 20px;
+  margin: 0 0 30px;
+  text-align: left;
+}
+.modal-content input:focus{
+  outline: none;
+}
+
+@media (max-width: 767px) {
+  .logo {
+      width: 60px;
+  }
+  .dropbtn img {
+      width: 40px;
+  }
+  .main{
+      padding: 30px 20px;
+  }
+  .dropbtn{
+    padding: 10px 15px 0 0;
+  }
+  .tweet-box{
+      padding: 20px;
+  }
+  .tweet-box .tw-tweet{
+    width: 70%;
+  }
+  .tweet-box .tw-tweet p{
+    font-size: 13px;
+  }
+}
